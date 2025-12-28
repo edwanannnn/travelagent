@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aivoric Travel | Sacred Luxury Journey</title>
+    
+    <!-- 1. TAILWIND CSS (Styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. CONFIG TAILWIND (Warna Custom) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0D0D0D',
+                        gold: '#D4AF37',
+                        marble: '#F4F1EA',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 3. FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- 4. ANIMATION LIBRARY (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- 5. ICONS (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styles */
+        body { background-color: #0D0D0D; color: #F4F1EA; overflow-x: hidden; }
+        
+        /* Golden Text Gradient */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Particle Dust Animation */
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        /* Scrollbar Chat */
+        .chat-scroll::-webkit-scrollbar { width: 4px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 2px; }
+    </style>
+</head>
+<body class="relative font-sans">
+
+    <!-- NAVBAR (Mobile Friendly) -->
+    <nav class="fixed w-full z-50 top-0 px-4 md:px-6 py-4 transition-all duration-300 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 border border-gold rounded-full flex items-center justify-center">
+                    <span class="font-serif text-lg md:text-xl italic text-gold">A</span>
+                </div>
+                <span class="font-serif text-lg md:text-xl tracking-[0.2em] uppercase text-gold">Al-Haramain</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 text-sm tracking-widest uppercase opacity-80 text-marble">
+                <a href="#hero" class="hover:text-gold transition-colors">Home</a>
+                <a href="#packages" class="hover:text-gold transition-colors">Packages</a>
+                <a href="#engine" class="hover:text-gold transition-colors">Technology</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="openWA('Halo, saya butuh bantuan login portal client.')" class="hidden md:flex items-center gap-2 border border-gold/50 px-4 py-2 rounded-full hover:bg-gold hover:text-black transition-all duration-300 text-marble">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span class="text-xs tracking-widest uppercase">Consult</span>
+                </button>
+                <button class="md:hidden text-gold" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-midnight border-b border-white/10 p-6 flex-col gap-4 shadow-2xl">
+            <a href="#hero" onclick="toggleMobileMenu()" class="text-marble uppercase tracking-widest text-sm hover:text-gold">Home</a>
+            <a href="#packages" onclick="toggleMobileMenu()" class="text-marble uppercase tracking-widest text-sm hover:text-gold">Packages</a>
+            <button onclick="openWA('Halo, saya butuh konsultasi.')" class="flex items-center justify-center gap-2 border border-gold px-4 py-3 rounded-full text-gold w-full mt-2">
+                <i data-lucide="user" class="w-4 h-4"></i> Consult Expert
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?q=80&w=1920" 
+                 class="w-full h-full object-cover brightness-[0.4] grayscale-[30%] sepia-[20%] scale-110 animate-pulse-slow" 
+                 alt="Makkah">
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-midnight/50"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-4 md:px-6 mt-16 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="1500">
+            <p class="text-gold tracking-[0.3em] uppercase text-[10px] md:text-sm mb-4">The Sacred Journey Begins Here</p>
+            <h1 class="text-5xl md:text-9xl font-thin leading-none mb-6 mix-blend-overlay opacity-90 font-serif">LABBAIK</h1>
+            <p class="font-arabic text-2xl md:text-4xl text-gold/80 mb-8 md:mb-10">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ</p>
+            <p class="max-w-xl mx-auto text-gray-300 font-light text-sm md:text-lg leading-relaxed mb-10 font-sans px-4">
+                Rasakan ketenangan absolut. Kami mengurus setiap detail perjalanan spiritual Anda dengan presisi otomatisasi dan kehangatan layanan kelas dunia.
+            </p>
+            <button onclick="document.getElementById('packages').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 md:px-10 md:py-4 border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-500 uppercase tracking-widest text-xs rounded-sm">
+                Explore Collections
+            </button>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 animate-bounce text-gold/50">
+            <i data-lucide="chevron-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <!-- PACKAGES SECTION -->
+    <section id="packages" class="relative py-20 px-4 md:px-6 bg-midnight">
+        <!-- Dust Particles Container -->
+        <div id="particles" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gold/20 pb-8" data-aos="fade-up">
+                <div>
+                    <h2 class="text-3xl md:text-6xl font-serif text-marble mb-2">Sanctuary Packages</h2>
+                    <p class="text-gold italic font-serif text-lg md:text-xl">Curated for the seekers of excellence.</p>
+                </div>
+                <div class="hidden md:block text-right">
+                    <p class="text-xs tracking-widest uppercase text-gray-500">Real-time Availability</p>
+                    <p class="text-xl font-mono text-gold animate-pulse">Live: Available</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[800px]">
+                
+                <!-- GOLD PACKAGE -->
+                <div onclick="openWA('Saya tertarik paket Gold Royal Haramain')" class="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden border border-white/10 hover:border-gold/60 transition-all duration-500 min-h-[400px] rounded-sm" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-4 right-4 z-30 bg-gold text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest rounded-full flex items-center gap-1">
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> Exclusive
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[20%]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full">
+                        <span class="px-2 py-1 border border-gold text-gold text-[10px] uppercase tracking-widest bg-black/50 backdrop-blur-sm">Gold Tier</span>
+                        <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-1 text-gold-gradient">The Royal Haramain</h3>
+                        <p class="text-gray-400 text-sm mb-4">Hotel 0 Meter (Dar Al Tawhid), Private Jet Option, Raudhah Access.</p>
+                        <div class="flex flex-col md:flex-row justify-between md:items-end gap-2">
+                            <p class="text-2xl md:text-3xl font-serif text-marble">Rp 185.000.000</p>
+                            <span class="text-gold text-xs uppercase font-bold group-hover:underline flex items-center gap-1">Book via WhatsApp <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SILVER PACKAGE -->
+                <div onclick="openWA('Saya tertarik paket Silver Serenity Madinah')" class="md:col-span-1 md:row-span-2 relative group cursor-pointer overflow-hidden border border-white/10 hover:border-gold/40 transition-all duration-500 min-h-[350px] rounded-sm" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://i.postimg.cc/Kc9bBGcX/download.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[10%]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <span class="text-marble/60 text-[10px] uppercase tracking-widest">Silver Tier</span>
+                        <h3 class="text-2xl font-serif text-marble my-1">Serenity Madinah</h3>
+                        <p class="text-gray-400 text-xs mb-4">Mövenpick Anwar Al Madinah & Pullman ZamZam.</p>
+                        <div class="border-t border-gold/20 pt-3 flex justify-between items-end">
+                            <p class="text-xl font-serif text-gold">Rp 65.500.000</p>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-500 group-hover:text-gold"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BRONZE PACKAGE -->
+                <div onclick="openWA('Saya tertarik paket Bronze Heritage Saver')" class="md:col-span-1 md:row-span-2 relative group cursor-pointer overflow-hidden border border-white/10 hover:border-gold/30 transition-all duration-500 min-h-[350px] rounded-sm" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://i.postimg.cc/FF6qh7sk/download-(1).jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[10%]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <span class="text-marble/60 text-[10px] uppercase tracking-widest">Bronze Tier</span>
+                        <h3 class="text-2xl font-serif text-marble my-1">Heritage Saver</h3>
+                        <p class="text-gray-400 text-xs mb-4">Hotel Bintang 4 Ring 1, Shuttle Bus 24 Jam.</p>
+                        <div class="border-t border-gold/20 pt-3 flex justify-between items-end">
+                            <p class="text-xl font-serif text-marble">Rp 42.500.000</p>
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gray-500 group-hover:text-gold"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGY/BOOKING SECTION -->
+    <section id="engine" class="py-20 bg-marble text-midnight px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1" data-aos="fade-right">
+                <span class="text-gold uppercase tracking-widest text-xs font-bold mb-4 block">The Aivoric Engine</span>
+                <h2 class="text-4xl md:text-5xl font-serif mb-6 leading-tight">Teknologi yang Melayani <br><span class="italic text-yellow-700">Kekhusyukan Ibadah.</span></h2>
+                <p class="text-gray-600 mb-8 font-light text-sm md:text-base">Kami menghilangkan friksi birokrasi. Sistem n8n di backend kami bekerja 24/7 memantau perubahan harga dan jadwal agar Anda fokus ibadah.</p>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-gold w-5 h-5"></i> Automated Invoicing via WhatsApp</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-gold w-5 h-5"></i> Real-time Flight Tracking</li>
+                    <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-gold w-5 h-5"></i> AI-Powered Manasik Guide</li>
+                </ul>
+            </div>
+
+            <div class="relative order-1 lg:order-2" data-aos="fade-left">
+                <div class="bg-white p-8 md:p-10 shadow-2xl rounded-sm border-t-4 border-gold">
+                    <h3 class="text-2xl md:text-3xl font-serif mb-6">Mulai Perencanaan</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs uppercase text-gray-400 mb-1">Keberangkatan</label>
+                            <div class="flex items-center border-b border-gray-300 py-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gold mr-2"></i>
+                                <input type="text" id="inputDate" placeholder="Contoh: Desember 2024" class="w-full outline-none focus:border-gold bg-transparent text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase text-gray-400 mb-1">Jamaah</label>
+                            <div class="flex items-center border-b border-gray-300 py-2">
+                                <i data-lucide="users" class="w-4 h-4 text-gold mr-2"></i>
+                                <input type="number" id="inputPax" placeholder="2 Pax" class="w-full outline-none focus:border-gold bg-transparent text-sm">
+                            </div>
+                        </div>
+                        <button onclick="checkAvailability()" class="w-full py-4 bg-midnight text-gold hover:bg-black transition-colors uppercase text-xs font-bold tracking-widest mt-4 flex justify-center gap-2 items-center group">
+                            Check Availability <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-midnight py-12 text-center border-t border-white/10">
+        <p class="font-serif text-2xl italic text-gold mb-4">Al-Haramain</p>
+        <p class="text-gray-500 text-xs font-light">Powered by Aivoric Neural Engine</p>
+    </footer>
+
+    <!-- AI CHAT WIDGET -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Box (Hidden by default) -->
+        <div id="chatBox" class="hidden mb-4 w-[85vw] md:w-80 bg-midnight/95 border border-gold/30 backdrop-blur-xl rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0">
+            <div class="bg-white/5 p-4 border-b border-gold/20 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-gold animate-pulse"></div>
+                    <span class="text-gold text-xs font-bold tracking-widest">ROYAL CONCIERGE</span>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+            
+            <div id="chatMessages" class="h-64 overflow-y-auto p-4 space-y-3 chat-scroll">
+                <!-- AI Message -->
+                <div class="flex justify-start">
+                    <div class="max-w-[90%] p-3 text-xs bg-white/10 text-marble border border-white/5 rounded-r-xl rounded-tl-xl leading-relaxed">
+                        Assalamu’alaikum. Saya AI Concierge Al-Haramain. Tanya saya soal Harga, Lokasi, atau Visa.
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 border-t border-gold/20 flex gap-2">
+                <input type="text" id="chatInput" placeholder="Ketik pertanyaan..." onkeydown="if(event.key === 'Enter') sendMessage()" class="flex-1 bg-transparent border border-white/10 rounded-lg px-3 py-2 text-white text-xs outline-none focus:border-gold">
+                <button onclick="sendMessage()" class="text-gold hover:text-white"><i data-lucide="send" class="w-4 h-4"></i></button>
+            </div>
+        </div>
+
+        <!-- Chat Trigger Button -->
+        <button onclick="toggleChat()" class="w-14 h-14 rounded-full bg-gold text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center hover:scale-110 transition-transform">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. Initialize Animation & Icons
+        AOS.init();
+        lucide.createIcons();
+
+        // 2. Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobileMenu');
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        }
+
+        // 3. WhatsApp Logic
+        const MY_PHONE = "6289517634196";
+        
+        function openWA(message) {
+            const url = `https://wa.me/${MY_PHONE}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function checkAvailability() {
+            const date = document.getElementById('inputDate').value;
+            const pax = document.getElementById('inputPax').value;
+            const msg = `Assalamu'alaikum, saya ingin cek ketersediaan Umrah:\n- Tanggal: ${date || 'Belum ditentukan'}\n- Jamaah: ${pax || 'Belum ditentukan'} Pax`;
+            openWA(msg);
+        }
+
+        // 4. Particle Dust Generator
+        const particleContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            let p = document.createElement('div');
+            p.className = 'particle';
+            let size = Math.random() * 3 + 1;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            particleContainer.appendChild(p);
+        }
+
+        // 5. AI Chatbot Logic (Smart Response)
+        const chatBox = document.getElementById('chatBox');
+        
+        function toggleChat() {
+            if (chatBox.classList.contains('hidden')) {
+                chatBox.classList.remove('hidden');
+                setTimeout(() => {
+                    chatBox.classList.remove('translate-y-10', 'opacity-0');
+                }, 10);
+            } else {
+                chatBox.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => {
+                    chatBox.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Add User Message
+            addMessage(text, 'user');
+            input.value = '';
+
+            // AI Thinking Delay
+            setTimeout(() => {
+                // Show thinking indicator could be added here
+                const response = getAIResponse(text);
+                addMessage(response, 'ai');
+                
+                // Jika fallback, show WA button
+                if (response.includes("menyambungkan Anda")) {
+                    setTimeout(() => addWAButton(), 500);
+                }
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-[85%] p-3 text-xs leading-relaxed ${sender === 'user' 
+                ? 'bg-gold text-black rounded-l-xl rounded-tr-xl font-medium' 
+                : 'bg-white/10 text-marble border border-white/5 rounded-r-xl rounded-tl-xl'}`;
+            bubble.innerText = text;
+            
+            div.appendChild(bubble);
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addWAButton() {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'flex justify-start';
+            div.innerHTML = `
+                <button onclick="openWA('Halo, saya diarahkan Chatbot')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-green-700 flex items-center gap-2 transition-colors">
+                    <i data-lucide="message-circle" class="w-3 h-3"></i> Chat WhatsApp
+                </button>
+            `;
+            container.appendChild(div);
+            lucide.createIcons(); // Refresh icons
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function getAIResponse(input) {
+            const lower = input.toLowerCase();
+            if (lower.includes('harga') || lower.includes('biaya')) return "Paket mulai Rp 42,5 Juta (Heritage) hingga Rp 185 Juta (Gold Royal). Termasuk hotel & visa.";
+            if (lower.includes('lokasi') || lower.includes('alamat')) return "Kantor pusat kami di Surabaya, namun kami melayani jamaah seluruh Indonesia secara digital.";
+            if (lower.includes('visa')) return "Kami menggunakan Visa Muqeem Instant Approval dengan tingkat keberhasilan 99.9%.";
+            if (lower.includes('hotel')) return "Untuk Gold kami bekerjasama dengan Dar Al Tawhid (0 Meter), Silver dengan Mövenpick.";
+            return "Pertanyaan bagus. Untuk detail tersebut, izinkan saya menyambungkan Anda ke agen manusia via WhatsApp.";
+        }
+    </script>
+</body>
+</html>
